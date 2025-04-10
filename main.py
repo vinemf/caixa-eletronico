@@ -30,12 +30,13 @@ while True:
         while True:
              depositar = input("Digite o valor para depósito: ")
              try:
-                     if float(depositar)>0:
-                        saldo += float(depositar)
-                        extrato.append(f"Depósito: R${round(depositar, 2)}")
+                     valor = float(depositar)
+                     if valor>0:
+                        saldo += valor
+                        extrato.append(f"Depósito: R${round(valor, 2)}")
                         print("Depósito realizado com sucesso!")
                         break
-                     elif float(depositar)<=0:
+                     elif valor<=0:
                         print("Depósito inválido! Você deve depositar um valor existente. Tente novamente.")
              except:
                     print("Depósito inválido! Digite apenas números.")
@@ -44,17 +45,18 @@ while True:
           while True:
              sacar = input("Digite o valor para saque: ")
              try:
-                     if float(sacar)<=saldo and float(sacar)>0:
-                        saldo -= float(sacar)
-                        extrato.append(f"Saque: R${round(sacar, 2)}")
+                     valor = float(sacar)
+                     if valor>saldo:
+                        print("Saque inválido! Seu saldo é de R$" + round(saldo, 2) + ". Tente novamente.")
+                     elif valor<=0:
+                          print("Saque inválido! Você deve sacar um valor existente. Tente novamente.")
+                     elif valor>limite:
+                          print("Saque inválido! O limite de saque é de R$ 5.000,00.")
+                     else:
+                        saldo -= valor
+                        extrato.append(f"Saque: R${round(valor, 2)}")
                         print("Saque realizado com sucesso!")
                         break
-                     elif float(sacar)>saldo:
-                        print("Saque inválido! Seu saldo é de R$" + round(saldo, 2) + ". Tente novamente.")
-                     elif float(sacar)<=0:
-                          print("Saque inválido! Você deve sacar um valor existente. Tente novamente.")
-                     elif float(sacar)>limite:
-                          print("Saque inválido! O limite de saque é de R$ 5.000,00.")
                      
              except:
                     print("Saque inválido! Tente novamente.")
@@ -66,7 +68,7 @@ while True:
            else:
                 for item in extrato:
                      print(item)
-                     print("Seu saldo atual é R$" + str(round(saldo, 2)))
+                print("Seu saldo atual é R$" + str(round(saldo, 2)))
           
    elif opcao == '5':
            print("Obrigado por usar o caixa eletrônico!")
